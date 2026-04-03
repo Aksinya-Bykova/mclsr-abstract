@@ -53,6 +53,14 @@ There are some errors in original papers (metrics can't be > 1.0), so we didn't 
 | NDCG@50 | 0.0106 | **0.0254** | +139.6% |
 | HitRate@50 | 0.0490 | **0.1089** | +122.2% |
 
+<p align="center">
+  <img src="assets/ndcg_graph.png" width="45%" />
+  <img src="assets/recall_graph.png" width="45%" /> 
+</p>
+<p align="center">
+  <em>Figure 1: NDCG@20 (left) and Recall@20 (right) comparison. The green line represents our optimized MCLSR implementation.</em>
+</p>
+
 Preliminary experiments on the Amazon-Books dataset also showed a similar trend, where our implementation consistently outperformed the SASRec baseline, confirming the robustness of the multi-level contrastive learning approach across different product categories.
 
 **Discussion and Critical Observations:** Our reproduction confirms that while the MCLSR framework is conceptually powerful, its original implementation details and reported results are **highly unreliable**. By resolving methodological ambiguities — specifically the lack of co-action weights and incorrect tensor shapes — we achieved a Recall@20 of **0.0420**. 
