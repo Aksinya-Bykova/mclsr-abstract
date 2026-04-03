@@ -88,6 +88,8 @@ We evaluate our refined MCLSR implementation against both a pure SASRec baseline
 
 ![NDCG Metrics](https://github.com/Aksinya-Bykova/mclsr-abstract/blob/main/assets/Screenshot%20from%202026-04-03%2023-33-32.png)
 
+![Recall Metrics](https://github.com/Aksinya-Bykova/mclsr-abstract/blob/main/assets/Screenshot%20from%202026-04-03%2023-35-09.png)
+
 Our current work investigates the broader applicability of **Sampling-Bias Correction (LogQ)** [4] within different sequential recommendation architectures. This method, originally proposed by Google researchers, addresses the inherent bias in non-uniform negative sampling by adjusting model logits based on item frequency:
 
 $$s^c(x, y) = s(x, y) - \lambda \log(p_j)$$
