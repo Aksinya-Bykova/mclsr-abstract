@@ -2,7 +2,16 @@
 
 **Authors:** Aksinya Bykova, Pavel Krasnov  
 **Affiliation:** Yandex School of Data Analysis (YSDA)  
-**Code:** [GitHub Repository (aksinya branch)](https://github.com/CTLab-ITMO/mclsr/tree/aksinya)  
+
+## Problem
+We found SOTA model, but it didn't have open source code implementation
+
+[Multi-level Contrastive Learning Framework for Sequential
+Recommendation](https://arxiv.org/pdf/2208.13007)
+
+Our code implementation is available here: [GitHub Repository (aksinya branch)](https://github.com/CTLab-ITMO/mclsr/tree/aksinya)  
+
+The result is actually great
 
 ---
 
