@@ -46,12 +46,12 @@ There are some errors in original papers (metrics can't be > 1.0), so we didn't 
 #### Table 2: Reproduction (independent implementation) vs. SASRec baseline on Amazon-Clothing
 | Metric | SASRec (Baseline) | MCLSR (Reproduction) | Improvement |
 | :--- | :--- | :--- | :--- |
-| Recall@20 | 0.0339 | **0.0420** | +23.9% |
-| NDCG@20 | 0.0144 | **0.0189** | +31.2% |
-| Hit@20 | 0.0528 | **0.0660** | +25.0% |
-| Recall@50 | 0.0588 | **0.0704** | +19.7% |
-| NDCG@50 | 0.0199 | **0.0254** | +27.6% |
-| Hit@50 | 0.0898 | **0.1089** | +21.3% |
+| Recall@20 | 0.0184 | **0.0420** | +128.3% |
+| NDCG@20 | 0.0076 | **0.0189** | +148.7% |
+| HitRate@20 | 0.0272 | **0.0660** | +142.6% |
+| Recall@50 | 0.0314 | **0.0704** | +124.2% |
+| NDCG@50 | 0.0106 | **0.0254** | +139.6% |
+| HitRate@50 | 0.0490 | **0.1089** | +122.2% |
 
 Preliminary experiments on the Amazon-Books dataset also showed a similar trend, where our implementation consistently outperformed the SASRec baseline, confirming the robustness of the multi-level contrastive learning approach across different product categories.
 
