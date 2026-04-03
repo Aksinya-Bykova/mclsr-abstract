@@ -76,3 +76,12 @@ We evaluate our refined MCLSR implementation against both a pure SASRec baseline
 | SASRec (Pure Baseline) | 0.0184 | 0.0076 | 0.0272 | 0.0314 | 0.0106 | 0.0490 |
 | SASRec (+ LogQ) | 0.0339 | 0.0144 | 0.0528 | 0.0588 | 0.0199 | 0.0898 |
 | **MCLSR (Our Refined)** | **0.0420** | **0.0189** | **0.0660** | **0.0704** | **0.0254** | **0.1089** |
+
+Our current work investigates the broader applicability of **Sampling-Bias Correction (LogQ)** [4] within different sequential recommendation architectures. This method, originally proposed by Google researchers, addresses the inherent bias in non-uniform negative sampling by adjusting model logits based on item frequency:
+
+$$s^c(x, y) = s(x, y) - \lambda \log(p_j)$$
+
+Our preliminary experiments confirm that popularity bias is a significant bottleneck for standard sequential models. Specifically, integrating LogQ correction into the **SASRec** architecture yielded a substantial performance boost, nearly doubling the baseline metrics on the *Amazon-Clothing* dataset (as shown in Table 3).
+
+### Additional References
+[4] Yi, X., et al. 2019. [Sampling-Bias-Corrected Neural Modeling for Large Corpus Item Recommendations](https://research.google/pubs/sampling-bias-corrected-neural-modeling-for-large-corpus-item-recommendations/). In *RecSys*.
