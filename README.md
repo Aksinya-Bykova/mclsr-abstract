@@ -98,3 +98,48 @@ Our preliminary experiments confirm that popularity bias is a significant bottle
 
 ### Additional References
 [4] Yi, X., et al. 2019. [Sampling-Bias-Corrected Neural Modeling for Large Corpus Item Recommendations](https://research.google/pubs/sampling-bias-corrected-neural-modeling-for-large-corpus-item-recommendations/). In *RecSys*.
+
+
+# Optimization Tricks
+
+Old version:
+
+```
+def _filter_matrix_by_top_k(matrix, k):
+    # --- OLD IMPLEMENTATION ---
+    # mat = matrix.tolil()
+    # for i in range(mat.shape[0]):
+    #     if len(mat.rows[i]) <= k:
+    #         continue
+    #     data = np.array(mat.data[i])
+    #     top_k_indices = np.argpartition(data, -k)[-k:]
+    #     mat.data[i] = [mat.data[i][j] for j in top_k_indices]
+    #     mat.rows[i] = [mat.rows[i][j] for j in top_k_indices]
+    # return mat.tocsr()
+```
+
+Optimized:
+
+```
+    mat = matrix.tocsr()
+    
+    for i in range(mat.shape[0]):
+        start = mat.indptr[i]
+        end = mat.indptr[i+1]
+        
+        # Only process rows that actually exceed the neighborhood size
+        if end - start > k:
+            row_slice = mat.data[start:end]
+            
+            # Find the threshold value (the k-th largest element)
+            # np.partition is faster than a full sort: it puts the top-k values at the end
+            threshold = np.partition(row_slice, -k)[-k]
+            
+            # Effectively prune edges by zeroing out everything below the threshold
+            # This keeps exactly k (or slightly more if there are ties) elements
+            row_slice[row_slice < threshold] = 0
+    
+    # Post-processing: remove the explicitly zeroed elements from the sparse structure
+    mat.eliminate_zeros()
+    return mat
+``
