@@ -54,7 +54,7 @@ There are some errors in original papers (metrics can't be > 1.0), so we didn't 
 | HitRate@50 | 0.0490 | **0.1089** | +122.2% |
 
 
-![Hit Metrics](assets/Screenshot from 2026-04-03 23-21-15.png)
+![Hit Metrics](https://github.com/Aksinya-Bykova/mclsr-abstract/blob/main/assets/Screenshot%20from%202026-04-03%2023-21-15.png)
 
 Preliminary experiments on the Amazon-Books dataset also showed a similar trend, where our implementation consistently outperformed the SASRec baseline, confirming the robustness of the multi-level contrastive learning approach across different product categories.
 
