@@ -66,3 +66,13 @@ This work provides an independent validation of the MCLSR framework. By implemen
 1. Wang, Z., et al. 2022. Multi-level Contrastive Learning Framework for Sequential Recommendation. In *CIKM*.
 2. Kang, W.-C., & McAuley, J. 2018. Self-attentive sequential recommendation. In *ICDM*.
 3. He, X., et al. 2020. LightGCN: Simplifying and Powering graph convolution network for recommendation. In *SIGIR*.
+
+# LogQ Correction
+We evaluate our refined MCLSR implementation against both a pure SASRec baseline and an enhanced SASRec version utilizing LogQ correction. All results are reported on the *Amazon-Clothing* dataset using a rigorous full-ranking protocol.
+
+**Table 3: Performance comparison across different architectures and enhancements**
+| Model | Recall@20 | NDCG@20 | HitRate@20 | Recall@50 | NDCG@50 | HitRate@50 |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| SASRec (Pure Baseline) | 0.0184 | 0.0076 | 0.0272 | 0.0314 | 0.0106 | 0.0490 |
+| SASRec (+ LogQ) | 0.0339 | 0.0144 | 0.0528 | 0.0588 | 0.0199 | 0.0898 |
+| **MCLSR (Our Refined)** | **0.0420** | **0.0189** | **0.0660** | **0.0704** | **0.0254** | **0.1089** |
