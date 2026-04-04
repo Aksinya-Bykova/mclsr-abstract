@@ -186,9 +186,9 @@ row_view[...] = 0
 ```
 Inplace operation. Don't have to create new object
 
-In CSR, all (9,000,000) numbers are stored tightly packed together. When the processor loads a row slice for processing, it reads the data in chunks (cache lines). The next numbers of the row already end up in the L1 cache before they are even needed
+In CSR, all (9,000,000) numbers are stored tightly packed together. When the CPU accesses an element, it fetches data in 64-byte cache lines, automatically pre-loading multiple subsequent weights into the L1 cache. This significantly reduces memory latency by minimizing direct RAM access, effectively aligning the implementation with the underlying hardware architecture
 
-I did something similar in C++ aligning the structure for a multithreading program
+I did [something similar in C++ in 2024 year](https://github.com/Aksinya-Bykova/Integral-OMP) aligning the structure for a multithreading program
 
 ```
 threshold = np.partition(row_slice, -k)[-k]
@@ -199,3 +199,5 @@ Same logic with old version, but works faster.  ```np.partition``` finds element
 mat.eliminate_zeros()
 ```
 After loop just reducing useless elements O(E) moving forward. It removes all non-zero element to a new place tightly packed together  
+
+
