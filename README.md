@@ -197,13 +197,17 @@ threshold = np.partition(row_slice, -k)[-k]
 row_view[row_view < threshold] = 0
 ```
 
-Physically removing an element from a contiguous array necessitates shifting every subsequent element by one position to fill the gap. Performing such shifts for every pruned edge results in O(E^2) complexity (E - all edges)
+Physically removing an element from a contiguous array - bad idea. It means shifting every subsequent element by one position to fill the gap. Performing such shifts for every means O(E^2) complexity (where E - all edges)
  
-Insead we use tricks: by zeroing owe avoid these redundant memory shifts during the iteration. ```np.partition``` finds element with mean time O(n). Then all useless elements are marked 0 - it's faster than a loop with condition
+Insead we use trick: mark all useless elements 0. So we avoid these redundant memory shifts during the iteration. ```np.partition``` finds element with mean time O(n)
+
+```row_view[row_view < threshold] = 0``` - NumPy operation needs O(n)
+
+Then
 ```
 mat.eliminate_zeros()
 ```
-After loop just reducing useless elements O(E) moving forward. It removes all non-zero element to a new place tightly packed together  
+After loop it removes all non-zero element to a new place tightly packed together  
 
 Item-Item Graph works the same way also using this method
 
