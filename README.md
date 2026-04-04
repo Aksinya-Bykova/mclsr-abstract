@@ -182,3 +182,4 @@ mat.rows[i] = [mat.rows[i][j] for j in top_k_indices]
 It doesn't sort to take top-k, just moves elements to the end and we take them as top-k
 
 **Why old imlemetation is bad practice?**
+LIL stores lists sparsely - so the processor has to execute mat.data[i][j] very slow in python! Complexity is O(VN), where V - number of of rows, N - the row dencity. Firstly find [i] then [j]. Unlike C++, in Python array's elements are not contiguous in memory. So elemets are sparesed and thehe are cache misses: processor just waits RAM. Also in the loop are redundant objects: object creation and garbage collection - it's not ok
