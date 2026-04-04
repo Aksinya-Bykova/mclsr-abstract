@@ -102,7 +102,7 @@ Our preliminary experiments confirm that popularity bias is a significant bottle
 
 # Optimization Tricks
 
-Old version:
+## Old version:
 
 ```
 def _filter_matrix_by_top_k(matrix, k):
@@ -118,7 +118,7 @@ def _filter_matrix_by_top_k(matrix, k):
     # return mat.tocsr()
 ```
 
-Optimized:
+## Optimized:
 
 ```
     mat = matrix.tocsr()
@@ -142,4 +142,11 @@ Optimized:
     # Post-processing: remove the explicitly zeroed elements from the sparse structure
     mat.eliminate_zeros()
     return mat
-``
+```
+### Meaning
+```
+matrix.tolil() vs matrix.tocsr()
+```
+LIL - separated user list, CSR - only 3 arrays (data, indices, indptr). In the second access is much faster. It doesn't provide fast insertion, but we don't need this. We work with user-user graph. Data - stores the floating-point values of interaction counts (co-action weights). Indices - stores the column index for each value in data, these are the IDs of the neighbor users. Indptr: Maps the rows to the data and indices arrays
+
+Example: user 0 has data[0-4], user 1 has data[5-9] etc. data[7] = 15.0, indices[7] = 101 means weight beetween user 1 (because it has data[5-9], which includes 7) and user 101 is 15.0 
