@@ -1,5 +1,7 @@
 # Critical Reproduction and Optimization of Multi-level Contrastive Learning for Sequential Recommendation (MCLSR)
 
+It's not great abstarct. I just don't have social media, it's instead of post
+
 **Authors:** Aksinya Bykova, Pavel Krasnov  
 **Affiliation:** Yandex School of Data Analysis (YSDA)  
 
