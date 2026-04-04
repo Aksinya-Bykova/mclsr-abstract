@@ -149,4 +149,36 @@ matrix.tolil() vs matrix.tocsr()
 ```
 LIL - separated user list, CSR - only 3 arrays (data, indices, indptr). In the second access is much faster. It doesn't provide fast insertion, but we don't need this. We work with user-user graph. Data - stores the floating-point values of interaction counts (co-action weights). Indices - stores the column index for each value in data, these are the IDs of the neighbor users. Indptr: Maps the rows to the data and indices arrays
 
-Example: user 0 has data[0-4], user 1 has data[5-9] etc. data[7] = 15.0, indices[7] = 101 means weight beetween user 1 (because it has data[5-9], which includes 7) and user 101 is 15.0 
+Example: user 0 has data[0-4], user 1 has data[5-9] etc. For example data[7] = 15.0, indices[7] = 101 which means weight beetween user 1 (because it has data[5-9], which includes 7) and user 101 is 15.0. We will figure out why is it important later 
+
+```
+# for i in range(mat.shape[0]):
+#     if len(mat.rows[i]) <= k:
+#         continue
+#     data = np.array(mat.data[i])
+#     top_k_indices = np.argpartition(data, -k)[-k:]
+#     mat.data[i] = [mat.data[i][j] for j in top_k_indices]
+#     mat.rows[i] = [mat.rows[i][j] for j in top_k_indices]
+# return mat.tocsr()
+```
+Old implementation. Here mat.rows - array of neighbour IDs, mat.data - array of c-action weight of these neighbours
+```
+for i in range(mat.shape[0]):
+```
+Take every user, i - user ID
+```
+if len(mat.rows[i]) <= k: continue
+```
+Stopping condition (we need top-k)
+```
+data = np.array(mat.data[i])
+```
+Convert user weights array to numpy array
+```
+top_k_indices = np.argpartition(data, -k)[-k:]
+mat.data[i] = [mat.data[i][j] for j in top_k_indices]
+mat.rows[i] = [mat.rows[i][j] for j in top_k_indices]
+```
+It doesn't sort to take top-k, just moves elements to the end and we take them as top-k
+
+**Why old imlemetation is bad practice?**
