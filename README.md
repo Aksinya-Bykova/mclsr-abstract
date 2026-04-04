@@ -182,7 +182,7 @@ LIL stores lists sparsely - so the processor has to execute mat.data[i][j] very 
 
 **What do instead?**
 ```
-row_slice[...] = 0
+row_view[...] = 0
 ```
 Inplace operation. Don't have to create new object
 
