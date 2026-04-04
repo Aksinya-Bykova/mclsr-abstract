@@ -100,7 +100,7 @@ Our preliminary experiments confirm that popularity bias is a significant bottle
 [4] Yi, X., et al. 2019. [Sampling-Bias-Corrected Neural Modeling for Large Corpus Item Recommendations](https://research.google/pubs/sampling-bias-corrected-neural-modeling-for-large-corpus-item-recommendations/). In *RecSys*.
 
 
-# Optimization Tricks
+# Optimization Tricks (filter top k)
 
 ## Old version:
 
@@ -202,4 +202,9 @@ Insead we use tricks: by zeroing owe avoid these redundant memory shifts during 
 mat.eliminate_zeros()
 ```
 After loop just reducing useless elements O(E) moving forward. It removes all non-zero element to a new place tightly packed together  
+
+Item-Item Graph works the same way also using this method
+
+# Optimization Tricks (Efficiency-oriented Data Pipeline)
+
 
