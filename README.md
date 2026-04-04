@@ -143,13 +143,13 @@ def _filter_matrix_by_top_k(matrix, k):
     mat.eliminate_zeros()
     return mat
 ```
-### Meaning
+### Explanation
 ```
 matrix.tolil() vs matrix.tocsr()
 ```
-LIL - separated user list, CSR - only 3 arrays (data, indices, indptr). In the second access is much faster. It doesn't provide fast insertion, but we don't need this. We work with user-user graph. Data - stores the floating-point values of interaction counts (co-action weights). Indices - stores the column index for each value in data, these are the IDs of the neighbor users. Indptr: Maps the rows to the data and indices arrays
+LIL - separated user list, CSR - only 3 arrays (data, indices, indptr). In the second access is much faster. CSR doesn't provide fast insertion, but we don't need that here. We work with user-user graph. Data - stores the floating-point values of interaction counts (co-action weights). Indices - stores the column index for each value in data, these are the IDs of the neighbor users. Indptr: Maps the rows to the data and indices arrays
 
-Example: user 0 has data[0-4], user 1 has data[5-9] etc. For example data[7] = 15.0, indices[7] = 101 which means weight beetween user 1 (because it has data[5-9], which includes 7) and user 101 is 15.0. We will figure out why is it important later 
+Example: user 0 has data[0-4], user 1 has data[5-9] etc. For example data[7] = 15.0, indices[7] = 101 which means weight beetween user 1 (because it has data[5-9], which includes 7) and user 101 is 15.0. We will figure out why it is important later 
 
 ```
 # for i in range(mat.shape[0]):
@@ -179,7 +179,27 @@ top_k_indices = np.argpartition(data, -k)[-k:]
 mat.data[i] = [mat.data[i][j] for j in top_k_indices]
 mat.rows[i] = [mat.rows[i][j] for j in top_k_indices]
 ```
-It doesn't sort to take top-k, just moves elements to the end and we take them as top-k
+It doesn't fully sort; it just moves the top-k elements to the end, then takes them
 
 **Why old imlemetation is bad practice?**
-LIL stores lists sparsely - so the processor has to execute mat.data[i][j] very slow in python! Complexity is O(VN), where V - number of of rows, N - the row dencity. Firstly find [i] then [j]. Unlike C++, in Python array's elements are not contiguous in memory. So elemets are sparesed and thehe are cache misses: processor just waits RAM. Also in the loop are redundant objects: object creation and garbage collection - it's not ok
+LIL stores lists sparsely - so the processor has to execute mat.data[i][j] very slowly in python! Complexity is O(VN), where V - number of of rows, N - the row dencity. Firstly find [i] then [j]. Unlike C++, in Python array's elements are not contiguous in memory. So elemets are sparesed and thehe are cache misses: processor just is just waiting for RAM. Also in the loop are redundant objects: object creation and garbage collection - it's not ok
+
+**What do instead?**
+```
+row_slice[...] = 0
+```
+Inplace operation. Don't have to create new object
+
+In CSR, all (9,000,000) numbers are stored tightly packed together. When the processor loads a row slice for processing, it reads the data in chunks (cache lines). The next numbers of the row already end up in the L1 cache before they are even needed
+
+I did something similar in C++ aligning the structure for a multithreading program
+
+```
+threshold = np.partition(row_slice, -k)[-k]
+row_slice[row_slice < threshold] = 0
+```
+Same logic with old version, but works faster.  ```np.partition``` finds element with mean time O(n). Then all useless elements are marked 0 - it's faster than a loop with condition. Why zeros? It's faster than actual delete operation. Deleting an element from a CSR matrix requires shifting all subsequent elements in both the indices and data arrays to fill the gap. Doing this inside a loop would result in O(E^2) complexity (E - all edges)
+```
+mat.eliminate_zeros()
+```
+After loop just reducing useless elements O(E) moving forward. It removes all non-zero element to a new place tightly packed together  
