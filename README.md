@@ -1,6 +1,6 @@
 # Critical Reproduction and Optimization of Multi-level Contrastive Learning for Sequential Recommendation (MCLSR)
 
-I just don't have any social media, it's instead of post 😭
+I just don't have any social media, it's instead of a blog post for Nebius 😭
 
 **Authors:** Aksinya Bykova, Pavel Krasnov  
 **Affiliation:** Yandex School of Data Analysis (YSDA)  
