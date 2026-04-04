@@ -194,10 +194,12 @@ I did [something similar in C++ in 2024 year](https://github.com/Aksinya-Bykova/
 threshold = np.partition(row_slice, -k)[-k]
 row_view[row_view < threshold] = 0
 ```
-Same logic with old version, but works faster.  ```np.partition``` finds element with mean time O(n). Then all useless elements are marked 0 - it's faster than a loop with condition. Why zeros? It's faster than actual delete operation. Deleting an element from a CSR matrix requires shifting all subsequent elements in both the indices and data arrays to fill the gap. Doing this inside a loop would result in O(E^2) complexity (E - all edges)
+
+Physically removing an element from a contiguous array necessitates shifting every subsequent element by one position to fill the gap. Performing such shifts for every pruned edge results in O(E^2) complexity (E - all edges)
+ 
+Insead we use tricks: by zeroing owe avoid these redundant memory shifts during the iteration. ```np.partition``` finds element with mean time O(n). Then all useless elements are marked 0 - it's faster than a loop with condition
 ```
 mat.eliminate_zeros()
 ```
 After loop just reducing useless elements O(E) moving forward. It removes all non-zero element to a new place tightly packed together  
-
 
