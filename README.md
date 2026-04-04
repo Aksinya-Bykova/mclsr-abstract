@@ -121,26 +121,22 @@ def _filter_matrix_by_top_k(matrix, k):
 ## Optimized:
 
 ```
+def filter_matrix_by_top_k(matrix, k):
     mat = matrix.tocsr()
-    
+
     for i in range(mat.shape[0]):
         start = mat.indptr[i]
-        end = mat.indptr[i+1]
-        
-        # Only process rows that actually exceed the neighborhood size
+        end = mat.indptr[i + 1]
+
         if end - start > k:
-            row_slice = mat.data[start:end]
-            
-            # Find the threshold value (the k-th largest element)
-            # np.partition is faster than a full sort: it puts the top-k values at the end
-            threshold = np.partition(row_slice, -k)[-k]
-            
-            # Effectively prune edges by zeroing out everything below the threshold
-            # This keeps exactly k (or slightly more if there are ties) elements
-            row_slice[row_slice < threshold] = 0
-    
-    # Post-processing: remove the explicitly zeroed elements from the sparse structure
+            row_view = mat.data[start:end]
+
+            threshold = np.partition(row_view, -k)[-k]
+
+            row_view[row_view < threshold] = 0
+
     mat.eliminate_zeros()
+
     return mat
 ```
 ### Explanation
@@ -196,7 +192,7 @@ I did something similar in C++ aligning the structure for a multithreading progr
 
 ```
 threshold = np.partition(row_slice, -k)[-k]
-row_slice[row_slice < threshold] = 0
+row_view[row_view < threshold] = 0
 ```
 Same logic with old version, but works faster.  ```np.partition``` finds element with mean time O(n). Then all useless elements are marked 0 - it's faster than a loop with condition. Why zeros? It's faster than actual delete operation. Deleting an element from a CSR matrix requires shifting all subsequent elements in both the indices and data arrays to fill the gap. Doing this inside a loop would result in O(E^2) complexity (E - all edges)
 ```
