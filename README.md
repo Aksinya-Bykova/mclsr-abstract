@@ -215,7 +215,9 @@ Item-Item Graph works the same way also using this method
 # Matrix Optimization Tricks
 To treat users and items as nodes in a single unified graph, we construct a bipartite adjacency matrix $\mathbf{A} \in \mathbb{R}^{(N+M) \times (N+M)}$, where $N$ is the number of users and $M$ is the number of items.
 
-$$ \mathbf{A} = \begin{pmatrix} \mathbf{0} & \mathbf{R} \\ \mathbf{R}^T & \mathbf{0} \end{pmatrix} $$
+$$ 
+\mathbf{A} = \begin{pmatrix} \mathbf{0} & \mathbf{R} \\ \mathbf{R}^T & \mathbf{0} \end{pmatrix} 
+$$
 
 *   $\mathbf{R} \in \mathbb{R}^{N \times M}$ is the User-Item interaction matrix.
 *   The off-diagonal blocks represent connections between different sets (User-to-Item and Item-to-User).
