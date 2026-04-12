@@ -211,6 +211,39 @@ After loop it removes all non-zero element to a new place tightly packed togethe
 
 Item-Item Graph works the same way also using this method
 
-# Optimization Tricks (Efficiency-oriented Data Pipeline)
 
+# Matrix Optimization Tricks
+To treat users and items as nodes in a single unified graph, we construct a bipartite adjacency matrix $\mathbf{A} \in \mathbb{R}^{(N+M) \times (N+M)}$, where $N$ is the number of users and $M$ is the number of items.
 
+$$ \mathbf{A} = \begin{pmatrix} \mathbf{0} & \mathbf{R} \\ \mathbf{R}^T & \mathbf{0} \end{pmatrix} $$
+
+*   $\mathbf{R} \in \mathbb{R}^{N \times M}$ is the User-Item interaction matrix.
+*   The off-diagonal blocks represent connections between different sets (User-to-Item and Item-to-User).
+*   The diagonal blocks are zero because we assume no initial self-loops or intra-set edges.
+```
+R = sparse_matrix.tocsr()
+
+upper_right = R
+lower_left = R.T
+
+upper_left = sp.csr_matrix((fst_dim, fst_dim))
+lower_right = sp.csr_matrix((snd_dim, snd_dim))
+
+adj_mat = sp.bmat([[upper_left, upper_right], [lower_left, lower_right]])
+```
+
+Then we have to calculate $$ \mathcal{L} = D^{-\frac{1}{2}} A D^{-\frac{1}{2}} $$. There is a big optimization problem
+
+## Old Version
+```
+# rowsum = np.array(adj_mat.sum(1))
+# d_inv = np.power(rowsum, -0.5).flatten()
+# d_inv[np.isinf(d_inv)] = 0.
+# d_mat_inv = sp.diags(d_inv)
+# norm_adj = d_mat_inv.dot(adj_mat).dot(d_mat_inv)
+```
+
+## Optimized
+```
+norm_adj = adj_mat.multiply(d_inv[:, np.newaxis]).multiply(d_inv)
+```
