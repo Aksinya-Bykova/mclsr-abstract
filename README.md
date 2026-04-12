@@ -280,6 +280,14 @@ $$
 \mathbf{D}^{-1/2} = \text{diag}(v_0, v_1, \dots, v_{n-1})
 $$
 
+4. `norm_adj = d_mat_inv.dot(adj_mat).dot(d_mat_inv)`
+
+Finally
+
+$$
+\mathcal{L} = \mathbf{D}^{-1/2} \mathbf{A} \mathbf{D}^{-1/2}
+$$
+
 ## Optimized
 ```
 norm_adj = adj_mat.multiply(d_inv[:, np.newaxis]).multiply(d_inv)
