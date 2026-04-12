@@ -234,7 +234,10 @@ adj_mat = sp.bmat([[upper_left, upper_right], [lower_left, lower_right]])
 ```
 
 Then we have to calculate 
-$$ \mathcal{L} = \mathbf{D}^{-\frac{1}{2}} \mathbf{A} \mathbf{D}^{-\frac{1}{2}} $$. There is a big optimization problem
+
+$$ \mathcal{L} = \mathbf{D}^{-\frac{1}{2}} \mathbf{A} \mathbf{D}^{-\frac{1}{2}} $$. 
+
+There is a big optimization problem
 
 ## Old Version
 ```
