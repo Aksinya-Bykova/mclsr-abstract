@@ -253,6 +253,17 @@ There is a big optimization problem
 # norm_adj = d_mat_inv.dot(adj_mat).dot(d_mat_inv)
 ```
 
+1. ``rowsum = np.array(adj_mat.sum(1))`
+
+For each node $i$ we calculate its degree $d_i$:
+
+$$
+d_i = \sum_{j} \mathbf{A}_{ij}
+$$
+
+2. `d_inv = np.power(rowsum, -0.5).flatten()` и `d_inv[np.isinf(d_inv)] = 0.`
+
+
 ## Optimized
 ```
 norm_adj = adj_mat.multiply(d_inv[:, np.newaxis]).multiply(d_inv)
