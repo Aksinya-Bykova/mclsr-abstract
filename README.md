@@ -302,26 +302,35 @@ $$
 I actually trust but there is a proof
 
 <details>
-<summary>Mathematical Proof of Diagonal Scaling Equivalence</summary>
+Let $D^{-1/2}$ be a diagonal matrix where the diagonal elements are defined as $D^{-1/2}_{ii} = v_i = \frac{1}{\sqrt{d_i}}$. By the definition of matrix multiplication, the element $(i, j)$ of the product of three matrices $XAY$ is:
 
-Let $\mathbf{D}^{-1/2}$ be a diagonal matrix where the diagonal elements are defined as $\mathbf{D}^{-1/2}_{ii} = v_i = \frac{1}{\sqrt{d_i}}$. By the definition of matrix multiplication, the element $(i, j)$ of the product of three matrices $\mathbf{XAY}$ is:
+$$
+(XAY)_{ij} = \sum_{k} \sum_{m} X_{ik} A_{km} Y_{mj}
+$$
 
-```math
-(\mathbf{XAY})_{ij} = \sum_{k} \sum_{m} \mathbf{X}_{ik} \mathbf{A}_{km} \mathbf{Y}_{mj}
+Substituting $X = Y = D^{-1/2}$, we obtain:
 
-Since $\mathbf{D}^{-1/2}$ is a diagonal matrix, its elements $\mathbf{D}^{-1/2}_{pq}$ are non-zero if and only if $p = q$. This property causes the summations to collapse:
+$$
+(D^{-1/2} A D^{-1/2})_{ij} = \sum_{k} \sum_{m} D^{-1/2}_{ik} A_{km} D^{-1/2}_{mj}
+$$
+
+Since $D^{-1/2}$ is a diagonal matrix, its elements $D^{-1/2}_{pq}$ are non-zero if and only if $p = q$. This property causes the summations to collapse:
 
 1. The summation over $k$ is non-zero only when $k = i$.
 2. The summation over $m$ is non-zero only when $m = j$.
 
 This reduces the entire double summation to a single term:
 
-$$ (\mathbf{D}^{-1/2} \mathbf{A} \mathbf{D}^{-1/2})_{ij} = \mathbf{D}^{-1/2}_{ii} \mathbf{A}_{ij} \mathbf{D}^{-1/2}_{jj} $$
+$$
+(D^{-1/2} A D^{-1/2})_{ij} = D^{-1/2}_{ii} A_{ij} D^{-1/2}_{jj}
+$$
 
-Finally, substituting the definitions $\mathbf{D}^{-1/2}_{ii} = v_i$ and $\mathbf{D}^{-1/2}_{jj} = v_j$:
+Finally, substituting the definitions $D^{-1/2}_{ii} = v_i$ and $D^{-1/2}_{jj} = v_j$:
 
-$$ v_i \cdot \mathbf{A}_{ij} \cdot v_j = \frac{1}{\sqrt{d_i}} \cdot \mathbf{A}_{ij} \cdot \frac{1}{\sqrt{d_j}} = \frac{\mathbf{A}_{ij}}{\sqrt{d_i \cdot d_j}} $$
+$$
+v_i \cdot A_{ij} \cdot v_j = \frac{1}{\sqrt{d_i}} \cdot A_{ij} \cdot \frac{1}{\sqrt{d_j}} = \frac{A_{ij}}{\sqrt{d_i \cdot d_j}}
+$$
 
-This proves that the expensive matrix product $\mathbf{D}^{-1/2} \mathbf{A} \mathbf{D}^{-1/2}$ is mathematically identical to performing element-wise scaling of each adjacency entry by the square root of the degrees of its incident nodes.
+This proves that the expensive matrix product $D^{-1/2} A D^{-1/2}$ is mathematically identical to performing element-wise scaling.
 
 </details>
