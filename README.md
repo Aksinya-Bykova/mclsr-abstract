@@ -262,7 +262,9 @@ d_i = \sum_{j} \mathbf{A}_{ij}
 $$
 
 2. `d_inv = np.power(rowsum, -0.5).flatten()` and `d_inv[np.isinf(d_inv)] = 0.`
+
 We compute the scaling coefficient vector $v_i$, handling cases of zero-degree nodes (isolated nodes) to avoid division by zero:
+
 $$
 v_i = 
 \begin{cases} 
