@@ -292,3 +292,10 @@ $$
 ```
 norm_adj = adj_mat.multiply(d_inv[:, np.newaxis]).multiply(d_inv)
 ```
+
+There is a trick:
+
+$$
+\mathcal{L}_{ij} = (\mathbf{D}^{-1/2} \mathbf{A} \mathbf{D}^{-1/2})_{ij} = v_i \cdot \mathbf{A}_{ij} \cdot v_j = \frac{\mathbf{A}_{ij}}{\sqrt{d_i \cdot d_j}}
+$$
+
