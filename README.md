@@ -302,10 +302,13 @@ $$
 I actually trust but there is a proof
 
 <details>
+
 Let 
+
 $$
 \mathbf{D}^{-1/2}
 $$ 
+
 be a diagonal matrix where the diagonal elements are defined as 
 $$
 \mathbf{D}^{-1/2}_{ii} = v_i = \frac{1}{\sqrt{d_i}}
