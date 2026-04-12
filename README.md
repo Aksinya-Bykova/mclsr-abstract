@@ -304,8 +304,7 @@ I actually trust but there is a proof
 <details>
 Let $\mathbf{D}^{-1/2}$ be a diagonal matrix where the diagonal elements are defined as $\mathbf{D}^{-1/2}_{ii} = v_i = \frac{1}{\sqrt{d_i}}$. By the definition of matrix multiplication, the element $(i, j)$ of the product of three matrices $\mathbf{XAY}$ is:
 
-$$
-(\mathbf{XAY})_{ij} = \sum_{k} \sum_{m} \mathbf{X}_{ik} \mathbf{A}_{km} \mathbf{Y}_{mj}
+$(\mathbf{XAY})_{ij} = \sum_{k} \sum_{m} \mathbf{X}_{ik} \mathbf{A}_{km} \mathbf{Y}_{mj}$
 
 Substituting $\mathbf{X} = \mathbf{Y} = \mathbf{D}^{-1/2}$, we obtain:
 
