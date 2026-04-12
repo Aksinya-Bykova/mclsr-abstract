@@ -302,17 +302,20 @@ $$
 I actually trust but there is a proof
 
 <details>
+<summary>Mathematical Proof of Diagonal Scaling Equivalence</summary>
+
+
 Let $D^{-1/2}$ be a diagonal matrix where the diagonal elements are defined as $D^{-1/2}_{ii} = v_i = \frac{1}{\sqrt{d_i}}$. By the definition of matrix multiplication, the element $(i, j)$ of the product of three matrices $XAY$ is:
 
-$$
+```math
 (XAY)_{ij} = \sum_{k} \sum_{m} X_{ik} A_{km} Y_{mj}
-$$
+```
 
 Substituting $X = Y = D^{-1/2}$, we obtain:
 
-$$
+```math
 (D^{-1/2} A D^{-1/2})_{ij} = \sum_{k} \sum_{m} D^{-1/2}_{ik} A_{km} D^{-1/2}_{mj}
-$$
+```
 
 Since $D^{-1/2}$ is a diagonal matrix, its elements $D^{-1/2}_{pq}$ are non-zero if and only if $p = q$. This property causes the summations to collapse:
 
@@ -321,16 +324,14 @@ Since $D^{-1/2}$ is a diagonal matrix, its elements $D^{-1/2}_{pq}$ are non-zero
 
 This reduces the entire double summation to a single term:
 
-$$
+```math
 (D^{-1/2} A D^{-1/2})_{ij} = D^{-1/2}_{ii} A_{ij} D^{-1/2}_{jj}
-$$
+```
 
 Finally, substituting the definitions $D^{-1/2}_{ii} = v_i$ and $D^{-1/2}_{jj} = v_j$:
 
-$$
+```math
 v_i \cdot A_{ij} \cdot v_j = \frac{1}{\sqrt{d_i}} \cdot A_{ij} \cdot \frac{1}{\sqrt{d_j}} = \frac{A_{ij}}{\sqrt{d_i \cdot d_j}}
-$$
-
-This proves that the expensive matrix product $D^{-1/2} A D^{-1/2}$ is mathematically identical to performing element-wise scaling.
+```
 
 </details>
