@@ -216,7 +216,6 @@ Item-Item Graph works the same way also using this method
 To treat users and items as nodes in a single unified graph, we construct a bipartite adjacency matrix $\mathbf{A} \in \mathbb{R}^{(N+M) \times (N+M)}$, where $N$ is the number of users and $M$ is the number of items.
 
 $$ \mathbf{A} = \begin{pmatrix} \mathbf{0} & \mathbf{R} \\ \mathbf{R}^T & \mathbf{0} \end{pmatrix} $$
-$$ \mathbf{A} = \begin{pmatrix} \mathbf{0} & \mathbf{R} \\ \mathbf{R}^T & \mathbf{0} \end{pmatrix} $$
 
 *   $\mathbf{R} \in \mathbb{R}^{N \times M}$ is the User-Item interaction matrix.
 *   The off-diagonal blocks represent connections between different sets (User-to-Item and Item-to-User).
@@ -235,7 +234,7 @@ adj_mat = sp.bmat([[upper_left, upper_right], [lower_left, lower_right]])
 
 Then we have to calculate 
 
-$$ \mathcal{L} = \mathbf{D}^{-\frac{1}{2}} \mathbf{A} \mathbf{D}^{-\frac{1}{2}} $$. 
+\mathcal{L} = \mathbf{D}^{-\frac{1}{2}} \mathbf{A} \mathbf{D}^{-\frac{1}{2}}
 
 There is a big optimization problem
 
