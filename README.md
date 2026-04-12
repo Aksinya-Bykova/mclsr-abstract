@@ -273,6 +273,13 @@ d_i^{-1/2} & \text{if } d_i > 0 \\
 \end{cases}
 $$
 
+3. `d_mat_inv = sp.diags(d_inv)`
+We construct a sparse diagonal matrix $\mathbf{D}^{-1/2}$ with the computed coefficients along the main diagonal:
+
+$$
+\mathbf{D}^{-1/2} = \text{diag}(v_0, v_1, \dots, v_{n-1})
+$$
+
 ## Optimized
 ```
 norm_adj = adj_mat.multiply(d_inv[:, np.newaxis]).multiply(d_inv)
