@@ -316,8 +316,9 @@ $$.
 By the definition of matrix multiplication, the element $(i, j)$ of the product of three matrices $\mathbf{XAY}$ is:
 
 $$
+```math
 (\mathbf{XAY})_{ij} = \sum_{k} \sum_{m} \mathbf{X}_{ik} \mathbf{A}_{km} \mathbf{Y}_{mj}
-$$
+```
 
 Substituting $\mathbf{X} = \mathbf{Y} = \mathbf{D}^{-1/2}$, we obtain:
 
