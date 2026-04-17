@@ -191,6 +191,23 @@ In CSR, all (9,000,000) numbers are stored tightly packed together. When the CPU
 
 I did [something similar in C++ in 2024 year](https://github.com/Aksinya-Bykova/Integral-OMP) aligning the structure for a multithreading program
 
+---
+
+We can actually see cache sizes:
+```
+mrass@mrass-RedmiBook-13-R:~$ lscpu | grep -E 'L1|L2|L3'
+L1d cache:                            192 KiB (6 instances)
+L1i cache:                            192 KiB (6 instances)
+L2 cache:                             3 MiB (6 instances)
+L3 cache:                             8 MiB (2 instances)
+Vulnerability L1tf:                   Not affected
+mrass@mrass-RedmiBook-13-R:~$ 
+```
+
+We physically can't store such big data (9 * 10^6 * 8 bytes = 72mb) without RAM
+
+---
+
 ```
 threshold = np.partition(row_slice, -k)[-k]
 row_view[row_view < threshold] = 0
