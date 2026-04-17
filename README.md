@@ -306,4 +306,12 @@ $$
 \mathcal{L}_{ij} = (\mathbf{D}^{-1/2} \mathbf{A} \mathbf{D}^{-1/2})_{ij} = v_i \cdot \mathbf{A}_{ij} \cdot v_j = \frac{\mathbf{A}_{ij}}{\sqrt{d_i \cdot d_j}}
 $$
 
+How does it work?
 
+`adj_mat.multiply(d_inv[:, np.newaxis])`
+
+($\mathbf{D}^{-1/2} \mathbf{A}$)
+
+`.multiply(d_inv)`
+
+$\dots \mathbf{D}^{-1/2}$
