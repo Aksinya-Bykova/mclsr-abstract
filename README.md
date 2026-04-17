@@ -307,11 +307,13 @@ $$
 $$
 
 How does it work?
+$\mathbf{D}^{-1/2} \mathbf{A}$
 
 `adj_mat.multiply(d_inv[:, np.newaxis])`
 
-($\mathbf{D}^{-1/2} \mathbf{A}$)
-
-`.multiply(d_inv)`
+`[:, np.newaxis]` - reshape `d_inv` from (N, ) to (N, 1)
 
 $\dots \mathbf{D}^{-1/2}$
+
+`.multiply(d_inv)` - element-wise multiplication instead of matrix multiplication
+
