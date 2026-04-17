@@ -190,7 +190,7 @@ row_view[...] = 0
 ```
 Inplace operation. Don't have to create new object
 
-In CSR, all (9,000,000) numbers are stored tightly packed together. When the CPU accesses an element, it fetches data in 64-byte cache lines, automatically pre-loading multiple subsequent weights into the L1 cache. This significantly reduces memory latency by minimizing direct RAM access, effectively aligning the implementation with the underlying hardware architecture
+In CSR, all (9,000,000) numbers are stored tightly packed together. When the CPU accesses an element, it fetches data in 64-byte cache lines, automatically pre-loading multiple subsequent weights into the cache. This significantly reduces memory latency by minimizing direct RAM access, effectively aligning the implementation with the underlying hardware architecture
 
 I did [something similar in C++ in 2024 year](https://github.com/Aksinya-Bykova/Integral-OMP) aligning the structure for a multithreading program
 
