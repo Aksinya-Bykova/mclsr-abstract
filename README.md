@@ -247,9 +247,12 @@ There is a big optimization problem
 
 ## Old Version
 ```
-# rowsum = np.array(adj_mat.sum(1))
-# d_inv = np.power(rowsum, -0.5).flatten()
-# d_inv[np.isinf(d_inv)] = 0.
+# it's ok
+rowsum = np.array(adj_mat.sum(1))
+d_inv = np.power(rowsum, -0.5).flatten()
+d_inv[np.isinf(d_inv)] = 0.
+
+# bad practice
 # d_mat_inv = sp.diags(d_inv)
 # norm_adj = d_mat_inv.dot(adj_mat).dot(d_mat_inv)
 ```
@@ -292,7 +295,7 @@ $$
 $$
 
 
-## Optimized
+## Optimized 3-4 steps
 ```
 norm_adj = adj_mat.multiply(d_inv[:, np.newaxis]).multiply(d_inv)
 ```
