@@ -272,7 +272,7 @@ We compute the scaling coefficient vector $v_i$, handling cases of zero-degree n
 $$
 v_i = 
 \begin{cases} 
-d_i^{-1/2} & \text{if } d_i > 0 \\ 
+d_i^{  -1/2} & \text{if } d_i > 0 \\ 
 0 & \text{if } d_i = 0 
 \end{cases}
 $$
