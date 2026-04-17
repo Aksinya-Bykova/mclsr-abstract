@@ -281,6 +281,8 @@ $$
 \mathbf{D}^{-1/2} = \text{diag}(v_0, v_1, \dots, v_{n-1})
 $$
 
+Why is it bad? There is an allocation + copy + indexing (to take elements on diagonal)
+
 4. `norm_adj = d_mat_inv.dot(adj_mat).dot(d_mat_inv)`
 
 Finally
@@ -288,6 +290,7 @@ Finally
 $$
 \mathcal{L} = \mathbf{D}^{-1/2} \mathbf{A} \mathbf{D}^{-1/2}
 $$
+
 
 ## Optimized
 ```
