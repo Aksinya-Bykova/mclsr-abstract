@@ -307,6 +307,7 @@ $$
 $$
 
 How does it work?
+
 $\mathbf{D}^{-1/2} \mathbf{A}$
 
 `adj_mat.multiply(d_inv[:, np.newaxis])`
