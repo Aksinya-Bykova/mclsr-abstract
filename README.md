@@ -2,6 +2,8 @@
 
 I just don't have any social media, it's instead of a blog post for Nebius 😭
 
+Code is just [here in this repo](https://github.com/Aksinya-Bykova/mclsr-abstract/tree/main/code)
+
 **Authors:** [Aksinya Bykova](https://github.com/Aksinya-Bykova), [Pavel Krasnov](https://github.com/hookjabber) 
 
 **Affiliation:** Yandex School of Data Analysis (YSDA)  
