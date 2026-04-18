@@ -18,7 +18,7 @@ The result is actually great
 
 ---
 
-### Abstract
+### Kinda Abstract
 We present a reproduction study of the MCLSR framework (CIKM '22) for sequential recommendation. While MCLSR addresses data sparsity through multi-level contrastive learning, our study identifies significant inconsistencies in the original reported metrics and implementation. Focusing on the Amazon-Clothing dataset, we provide a corrected evaluation pipeline and an optimized independent implementation. Our results demonstrate that MCLSR significantly and consistently outperforms the SASRec baseline across all evaluation metrics, thereby clarifying the true potential and effectiveness of the multi-level contrastive learning approach.
 
 ### 1. Introduction
