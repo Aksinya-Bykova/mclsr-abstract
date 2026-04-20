@@ -109,6 +109,8 @@ For our research goals, the main thing is to test hypotheses as quickly as possi
 
 Clothing is a small dataset, so we use it to quickly test hypotises: if it doesn't work here there are some mistakes, if test passed we test on other datasets which are bigger. The problem is: if test passed on Clothing probably it means overfitting so we need check on others. But then we face the next problem: slow and memory heavy code is not okay. So optimmization is actually necessary  
 
+I didn't describe all optimization tricks because it may take too much your time and even not as interesting
+
 
 ## Old version:
 
