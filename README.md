@@ -105,7 +105,9 @@ Our preliminary experiments confirm that popularity bias is a significant bottle
 
 # Optimization Tricks (filter top k)
 
-For our research goals, the main thing is to test hypotheses as quickly as possible. On one hand, the code needs to run fast; on the other hand, we don't want to waste time developing code that will never go into production. Here, however, the optimization made sense: it may take N hours -> a few minutes on CPU. Clothing is a small dataset, so we use it to quickly test hypotises: if it doesn't work here there are some mistakes, if test passed we test on other datasets which  are bigger  
+For our research goals, the main thing is to test hypotheses as quickly as possible. On one hand, the code needs to run fast; on the other hand, we don't want to waste time developing code that will never go into production. Here, however, the optimization made sense: it may take N hours -> a few minutes on CPU
+
+Clothing is a small dataset, so we use it to quickly test hypotises: if it doesn't work here there are some mistakes, if test passed we test on other datasets which are bigger. The problem is: if test passed on Clothing probably it means overfitting so we need check on others. But then we face a problem: slow and memory heavy code is not okay  
 
 
 ## Old version:
