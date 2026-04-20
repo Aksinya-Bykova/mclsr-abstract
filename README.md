@@ -99,6 +99,8 @@ $$s^c(x, y) = s(x, y) - \lambda \log(p_j)$$
 
 Our preliminary experiments confirm that popularity bias is a significant bottleneck for standard sequential models. Specifically, integrating LogQ correction into the **SASRec** architecture yielded a substantial performance boost, nearly doubling the baseline metrics on the *Amazon-Clothing* dataset (as shown in Table 3).
 
+Actually I described this method to demonstrate that the last experiment doesn't mean that we implimentated SasRec with some mistakes (it would be cheating)
+
 ### Additional References
 [4] Yi, X., et al. 2019. [Sampling-Bias-Corrected Neural Modeling for Large Corpus Item Recommendations](https://research.google/pubs/sampling-bias-corrected-neural-modeling-for-large-corpus-item-recommendations/). In *RecSys*.
 
